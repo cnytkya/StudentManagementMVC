@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentManagementMVC.Data;
 
@@ -10,9 +11,11 @@ using StudentManagementMVC.Data;
 namespace StudentManagementMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250619174724_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +38,7 @@ namespace StudentManagementMVC.Migrations
                     b.Property<string>("Department")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StudentName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -49,35 +52,35 @@ namespace StudentManagementMVC.Migrations
                             Id = 1,
                             Age = 23,
                             Department = "Bilgisayar Programcılığı",
-                            StudentName = "Sedat"
+                            Name = "Sedat"
                         },
                         new
                         {
                             Id = 2,
                             Age = 22,
                             Department = "YZ Mühendisliği",
-                            StudentName = "Sıla"
+                            Name = "Sıla"
                         },
                         new
                         {
                             Id = 3,
                             Age = 21,
                             Department = "TDE Öğretmenliği",
-                            StudentName = "Mehmet"
+                            Name = "Mehmet"
                         },
                         new
                         {
                             Id = 4,
                             Age = 15,
                             Department = "Bilgisayar Mühendisliği",
-                            StudentName = "Tarık"
+                            Name = "Tarık"
                         },
                         new
                         {
                             Id = 5,
                             Age = 24,
                             Department = "Siber Güvenlik",
-                            StudentName = "Süleyman"
+                            Name = "Süleyman"
                         });
                 });
 #pragma warning restore 612, 618

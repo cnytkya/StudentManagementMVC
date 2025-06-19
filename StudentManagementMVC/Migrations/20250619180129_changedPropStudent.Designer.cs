@@ -11,8 +11,8 @@ using StudentManagementMVC.Data;
 namespace StudentManagementMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250614105837_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250619180129_changedPropStudent")]
+    partial class changedPropStudent
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,13 +38,50 @@ namespace StudentManagementMVC.Migrations
                     b.Property<string>("Department")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("StudentName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Age = 23,
+                            Department = "Bilgisayar Programcılığı",
+                            StudentName = "Sedat"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Age = 22,
+                            Department = "YZ Mühendisliği",
+                            StudentName = "Sıla"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Age = 21,
+                            Department = "TDE Öğretmenliği",
+                            StudentName = "Mehmet"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Age = 15,
+                            Department = "Bilgisayar Mühendisliği",
+                            StudentName = "Tarık"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Age = 24,
+                            Department = "Siber Güvenlik",
+                            StudentName = "Süleyman"
+                        });
                 });
 #pragma warning restore 612, 618
         }
