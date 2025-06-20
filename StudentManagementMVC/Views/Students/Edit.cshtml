@@ -1,23 +1,25 @@
 ﻿@model Student
 
 @{
-    ViewData["Title"] = "Yeni Öğrenci Oluştur";
+    ViewData["Title"] = "Öğrenciyi Düzenle";
 }
 
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
             <div class="card shadow-lg">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-warning text-dark">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0"><i class="fas fa-user-plus me-2"></i>Yeni Öğrenci Kaydı</h4>
-                        <a asp-action="Index" class="btn btn-sm btn-light">
-                            <i class="fas fa-list me-1"></i> Listeye Dön
+                        <h4 class="mb-0"><i class="fas fa-user-edit me-2"></i>Öğrenci Bilgilerini Düzenle</h4>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-dark">
+                            <i class="fas fa-eye me-1"></i> Detayları Gör
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Create" class="needs-validation" novalidate>
+                    <form asp-action="Edit" class="needs-validation" novalidate>
+                        <input type="hidden" asp-for="Id" />
+
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
                         <div class="row g-3">
@@ -27,37 +29,35 @@
                                     <label asp-for="StudentName" class="form-label"></label>
                                     <span asp-validation-for="StudentName" class="text-danger small"></span>
                                     <div class="invalid-feedback">
-                                        Lütfen öğrenci adını giriniz.
+                                        Öğrenci adı boş bırakılamaz
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input asp-for="Age" class="form-control" placeholder=" " required type="number" min="15" max="99" />
+                                    <input asp-for="Age" class="form-control" placeholder=" " required
+                                           type="number" min="18" max="45" />
                                     <label asp-for="Age" class="form-label"></label>
                                     <span asp-validation-for="Age" class="text-danger small"></span>
                                     <div class="invalid-feedback">
-                                        Lütfen geçerli bir yaş giriniz (15-99).
+                                        Yaş 18 ile 45 arasında olmalıdır
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <input asp-for="Department" class="form-control" placeholder=" " required />
+                                    <input asp-for="Department" class="form-control" placeholder=" " />
                                     <label asp-for="Department" class="form-label"></label>
                                     <span asp-validation-for="Department" class="text-danger small"></span>
-                                    <div class="invalid-feedback">
-                                        Lütfen bölüm bilgisini giriniz.
-                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                                    <button type="submit" class="btn btn-primary px-4">
-                                        <i class="fas fa-save me-2"></i>Oluştur
+                                    <button type="submit" class="btn btn-warning px-4 text-dark">
+                                        <i class="fas fa-save me-2"></i>Kaydet
                                     </button>
                                     <a asp-action="Index" class="btn btn-outline-secondary px-4">
                                         <i class="fas fa-times me-2"></i>İptal
@@ -81,7 +81,7 @@
     }
 
     <script>
-        // Client-side validation örneği
+        // Client-side validation
         (function () {
             'use strict'
 
@@ -118,5 +118,9 @@
 
     .invalid-feedback {
         font-size: 0.85rem;
+    }
+
+    .bg-warning {
+        background-color: #ffc107 !important;
     }
 </style>
