@@ -1,0 +1,82 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Öğrenci Detayları";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Öğrenci Bilgileri</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4 col-5">
+                            @Html.DisplayNameFor(Model => Model.StudentName)
+                        </dt>
+                        <dd class="col-sm-8 col-7">
+                            @Html.DisplayFor(Model => Model.StudentName)
+                        </dd>
+
+                        <dt class="col-sm-4 col-5">
+                            @Html.DisplayNameFor(Model => Model.Age)
+                        </dt>
+                        <dd class="col-sm-8 col-7">
+                            @Html.DisplayFor(Model => Model.Age)
+                        </dd>
+
+                        <dt class="col-sm-4 col-5">
+                            @Html.DisplayNameFor(Model => Model.Department)
+                        </dt>
+                        <dd class="col-sm-8 col-7">
+                            @Html.DisplayFor(Model => Model.Department)
+                        </dd>
+                    </dl>
+                </div>
+                <!-- Ekstra bilgiler için ikinci bir sütun eklenebilir -->
+                <div class="col-md-6">
+                    <!-- Buraya ekstra bilgiler veya resim eklenebilir -->
+                    <div class="text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-user-graduate fa-5x text-secondary"></i>
+                        </div>
+                        <div class="badge bg-info text-dark p-2">
+                            Öğrenci ID: @Model.Id
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-light">
+            <div class="d-flex flex-wrap justify-content-between">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 mb-md-0">
+                    <i class="fas fa-edit me-1"></i> Düzenle
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Listeye Geri Dön
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome ikonları için -->
+@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" /> burdaki kütüphane /Views/Shared/_Layou.cshtml şablonuna taşınmıştır.*@
+
+<style>
+    /* Özel stil eklemeleri */
+    dt {
+        font-weight: 500;
+        color: #6c757d;
+    }
+
+    dd {
+        margin-bottom: 0.5rem;
+    }
+
+    .card {
+        border-radius: 0.5rem;
+    }
+</style>

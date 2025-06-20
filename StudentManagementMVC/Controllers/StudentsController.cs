@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentManagementMVC.Data;
+using StudentManagementMVC.Models;
 
 namespace StudentManagementMVC.Controllers
 {
@@ -22,6 +23,32 @@ namespace StudentManagementMVC.Controllers
             return View(listAllStudents);
             //return View(await _appDbContext.Students.ToListAsync());
         }
+        //GET: Students/Details/3 id'si 3 olanın detaylarını getir
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound(); // 404 (bulunamadı hatası kodu), kullanıcıya HTTP üzerinden bulunamadı mesajı döndürecek.
+            }
+            var student = await _appDbContext.Students.FirstOrDefaultAsync(s=>s.Id == id);
+            if (student == null) //eğer öğrenci yoksa
+            {
+                return NotFound();
+            }
+            return View(student);
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Student student)
+        {
+            return View(student);
+        }
     }
 }
