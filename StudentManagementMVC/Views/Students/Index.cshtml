@@ -42,7 +42,7 @@
                                 <td class="text-center">
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-1">Düzenle</a>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm me-1">Detaylar</a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Sil</a>
+                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm btn-delete">Sil</a>
                                 </td>
                             </tr>
                         }
@@ -52,3 +52,21 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".btn-delete").click(function (e) {
+                e.preventDefault();
+                var url = $(this).attr("href");
+
+                $.get(url, function (data) {
+                    $("#modalContainer").html(data);
+                    var modal = new bootstrap.Modal(document.getElementById("deleteStudentModal"));
+                    modal.show();
+                });
+            });
+        });
+    </script>
+}
+<div id="modalContainer"></div>

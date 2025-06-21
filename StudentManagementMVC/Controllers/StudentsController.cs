@@ -84,5 +84,36 @@ namespace StudentManagementMVC.Controllers
             }
             return View(student);
         }
+
+        // GET: Students/Delete/5
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var student = await _appDbContext.Students.FirstOrDefaultAsync(s => s.Id == id);
+
+            if (student == null)
+                return NotFound();
+
+            return PartialView("_DeleteConfirmation", student);
+        }
+
+        // POST: Students/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken] //bütün saldırılardan korur.
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var student = await _appDbContext.Students.FindAsync(id);
+            if (student != null)
+            {
+                _appDbContext.Students.Remove(student);
+                await _appDbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
